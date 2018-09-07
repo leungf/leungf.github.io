@@ -5,7 +5,7 @@
     <url>%2F2018%2F07%2F05%2Fcryptocurrency%2F</url>
     <content type="text"><![CDATA[本文简述了采用矿池挖矿和 Solo 方式挖矿的方法。 综合比较而言，对于小算力的运行环境（1 GH/s），矿池挖矿具有少量的稳定收益（nanopool 为例，约 0.08 ETH/day）。 Solo 方式在主链上与大矿池竞争算力，一天能挖到一个区块的概率不足 2%。 矿池挖矿 v.s 独立挖矿采用矿池进行挖矿该方案可以看做是将算力租借给矿池，矿池根据你贡献的算力给与提成，提成的方式是将挖出的代币按照比例转移到挖矿账户上。这种方案需要的条件包括： 可以挖取代币的硬件环境和挖矿软件 代币地址 可加入的合适矿池 本说明以 nanopool 矿池和基于 MetaMask 的 Ethereum 地址为例对挖矿过程进行阐述。 首先，需要一个可以挖矿的硬件环境，本文默认认为已经有一台安装好 NVIDIA GPU 的服务器。 其次，准备好自己的加密货币地址。该地址可以是交易所的充币地址，可以是 MetaMask 的 Ethereum 地址，还可以是本地钱包的地址，因为最后需要矿池将代币转移给你自己。以 MetaMask 为例，直接复制 Ethernet 的 Address (Copy Address to Clipboard)，可以得到该地址。 再来，需要选择合适的挖矿软件。本文选择如下软件进行挖矿 ethminer 作为 Ethereum 的挖矿软件 xmr-stak 作为 Monero 的挖矿软件 最后，配置好参数运行挖矿软件就可以了。相关配置参数如下： ethminer 的配置参数如下 123456789101112export GPU_FORCE_64BIT_PTR=0export GPU_MAX_HEAP_SIZE=100export GPU_USE_SYNC_OBJECTS=1export GPU_MAX_ALLOC_PERCENT=100export GPU_SINGLE_ALLOC_PERCENT=100addr=....worker=....email=...../ethminer --farm-recheck 2000 -U \ -P stratum1+tcp://$&#123;addr&#125;@eth-asia1.nanopool.org:9999/$&#123;worker&#125;/$&#123;email&#125; xmr-stak 的配置参数如下 12345addr=....worker=....email=...../xmr-stak -O xmr-asia1.nanopool.org:14433 -u $&#123;addr&#125;.$&#123;worker&#125;/$&#123;email&#125; --currency monero7 值得注意的是上述配置中的 worker 和 email 需要正确填写，之后在 nanopool 网站上，根据这两个值可以调整最小提取额度。 收益以 ETH 为例。 nanopool 在7月9日当天的 ETH 平均算力为 42122.7 Gh/s，每 24 小时挖到的普通块数为 686，叔块数为 315。 省略叔块的奖励，在当天 1 Gh/s 的算力情况下，可以分得的收益为 $ 5 \times 686/42122.7=0.081428778 $ ETH。 独立节点挖矿独立挖矿的好处在于挖到 Eth 所得的奖励独享，坏处在于需要与大矿池竞争算力。本文中设置的挖矿拓扑为一个主网节点和多个挖矿节点。其中，主网节点用来同步全账本信息，运行 geth 程序；挖矿节点仅负责计算，运行 ethminer 程序。以下是账本同步与挖矿运行的脚步： 1234567891011121314151617181920212223242526# 主网同步节点./bin/geth --rpc \ --syncmode "fast" \ --rpcaddr "0.0.0.0" \ --rpcport "8545" \ --rpccorsdomain "*" \ --datadir "/mnt/data/eth-data/data" \ --ethash.dagdir "/mnt/data/eth-data/dag" \ --etherbase "..." \ --rpcapi "personal,db,eth,net,web3" \ console 2&gt;&amp;1 | tee geth.log # 主网节点开放端口sudo iptables -A INPUT -p tcp \ --dport 8545 -m conntrack \ --ctstate NEW,ESTABLISHED -j ACCEPT或sudo ufw allow 8545# 挖矿节点wallet_addr="..."ethnet_addr="..."## use nvidia gpu./ethminer --farm-recheck 2000 \ -U -P http://$&#123;wallet_addr&#125;@$&#123;ethnet_addr&#125; 关于挖矿的可能性可以参考 Ethereum 的算力统计图。 从15年以来，入块的最低算力是 11.5297 GH/s。 以 7月9日当天的平均算力为 292711.4538 GH/s。 如果是 1GH/s 的算力在7月9日当天挖到一个区块的可能性为 $ 1/292711.4538 \times (60 \times 60 \times 24)/15=0.019678082 $ （ETH 区块产生速率为 15 秒一个 Block）。 参考资料 Ethereum Homestead中文文档/挖矿 MathJax.Hub.Config({ extensions: ["tex2jax.js"], jax: ["input/TeX", "output/HTML-CSS"], tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], displayMath: [ ['$$','$$'], ["\\[","\\]"] ], }, "HTML-CSS": { availableFonts: ["TeX"] } });]]></content>
       <categories>
-        <category>cryptocurrency</category>
+        <category>funny</category>
       </categories>
       <tags>
         <tag>cryptocurrency</tag>
@@ -13,9 +13,26 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Express + MongoDB + PugJs 开发总结]]></title>
+    <url>%2F2018%2F03%2F23%2Fexpress-mongodb-website%2F</url>
+    <content type="text"><![CDATA[前段时间用 Express (PugJS) + MongoDB + Scrapy 建了一个视频索引网站。现在简单总结一下。 搭建网站前端开发首先，不得不说使用 MongoDB 建站是一件很方便的事情。后台 Model 有任何改动，只需要在 mongoose 加一个字段就可以了，相比于关系型数据库的严格类型约束，Object DB 更适合迭代开发。不过在性能上 mongodb 在后期有些吃力，特别是服务器配置不高的时候，mongodb 对内存的压力还是不小，不过这都是后话。在实现 search 和 related document 功能的时候，偷懒使用 MongoDB 的全文检索功能，性能不高，基本可以，适用于原型设计。 其次，Express 管理服务端逻辑。我采用传统的 MVC 将文件分为 controller、model、view 三个部分。controller 负载页面响应和数据获取，model 就是定义 mongoose 中 document 的字段，以及一些基本的存储逻辑（比如用户登录的密码验证，加密等操作），view 这部分我采用的 pugjs 进行前端页面渲染，pugjs 本质上还是 javascript 所以操作前端页面按照 JS 的逻辑来写就行了，不过开发过程中自己会把很多字符串处理逻辑都写在 PUG 中，感觉不是太好。 再次，就是前端 JS 的 IE 兼容问题。因为习惯使用 es2015 来写，在实际运行的时候发现在 chrome、firefox 下跑的很好，但是在 IE 上就出现各种问题。解决方法是用 babel 的 es2015-ie 插件进行兼容转换。 最后，Mobile 和 Destop 的支持，采用 Bootstrap 进行响应式布局，对于 CSS 不是特别熟悉，所以没有过多的研究响应式布局的细节。 数据获取建站的前提是有稳定的数据源，因为自己不做 CMS，所以内容方面全部依赖爬取站点的内容质量。在此，不做详述。 数据爬取使用 scrapy 框架，只是使用了基本的功能。对于分布式、IP 池等没有涉及。每个站点都写了一个 Spider。从 Spider 到 Server Model 还有一段路要走，也就是说爬下来的时候需要清洗才能入库呈现。这部分的 pipeline 我是这么设计的： scrapy 爬取元数据，包括视频播放连接和元信息两部分； 经过 join 将视频信息和元信息进行合并，然后剔除不符合要求的数据，进入 model 库； 对数据进行回查，相当于是对 model 库进行清洗，主要就是剔除失效的视频连接，这部分可以定期处理（一个简单粗暴的 CMS 功能）。 写在最后至此，站点就被搭建起来了，是不是很简单。因为没有数据维护（或者可以说是很简单的数据维护），一切数据依赖被爬取站点的数据质量。这种寄人篱下的站点建设方法不知道什么时候就会因为目标网站的升级需要更新自己的 spider 逻辑。 而且，随着 mongodb 中的数据越来越多，查询性能和 search 性能都在下降（前提是服务器不升级，512 MB 内存 1 CPU，6万多条记录，related search 的响应时间在 10-20 sec，find by index 的响应时间在 1-3 sec， findById 的的响应时间在 200-600 ms）。 此外，网站监控使用第三方服务，包括 google analysis、whos.amung.us、histats、clustrmaps 等，whos 主要监控实时的视频播放人数，histats 监控网站的访问，clustrmaps 这个主要是对旧版页面的监控。google analysis 分析整个网站的访问情况。 SEO：设置了 sitemap 和 robots，对页面的 meta 进行了简单的设计，但效果不是太理想，现在也在摸索。 反爬虫：还没做。 未来发展这个站点就这样了吧，作为一个练手的站点，未来最多也就是更新数据源了。不过以后想用 vue 或者 react 写个单页面的网站。将前端和后端数据完全分离，现在 pug 渲染的时候，还是会将一部分 control 逻辑混写在 view 中。期待前后端数据和渲染的完全分离。 最后贴一个现在 clustrmaps 统计的访问情况，以示纪念。]]></content>
+      <categories>
+        <category>development</category>
+      </categories>
+      <tags>
+        <tag>express</tag>
+        <tag>mongodb</tag>
+        <tag>pugjs</tag>
+        <tag>scrapy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Mac 使用笔记]]></title>
     <url>%2F2017%2F11%2F01%2Fmac-usage%2F</url>
     <content type="text"><![CDATA[使用 Mac 时的一些经验分享 关于代理科学上网（shadowsocks + VPS）搭建 shadowsocks 代理服务器在 DigitalOcean 买一个 VPS（5$/mo），然后安装 shadowsocks，网上有很多教程（例如 这个），再次不再累述。贴两个自己的配置。其中一个是用 supervisor 管理 shadowsocks 服务的配置文件。 123456789101112131415161718192021# cat /etc/supervisor/conf.d/shadowsocks.conf[program:shadowsocks]command=ssserver -c /etc/shadowsocks.jsonautorestart=trueuser=nobodystdout_logfile=/tmp/shadowsocks.out.logstderr_logfile=/tmp/shadowsocks.err.log# cat /etc/shadowsocks.json&#123; &quot;server&quot;:&quot;::&quot;, &quot;server_port&quot;:8836, &quot;local_port&quot;:1080, &quot;password&quot;: &quot;xx_x_xx&quot;, &quot;timeout&quot;:600, &quot;method&quot;:&quot;aes-256-cfb&quot;, &quot;fast_open&quot;: false, &quot;prefer_ipv6&quot;: true&#125; 本地下载安装 shadowsocks 客户端，然后如下图所示进行配置。 使用 Proxifier 全局代理shadowsocks 只能实现 socks 代理，限制了很多应用的使用。Proxifier 可以让不支持通过代理服务器工作的网络程序能通过HTTPS或SOCKS代理。 Proxifier 的使用非常简单，装好之后写 rules 就可以了。如下图所示，目前我只是将 Google Drive 的请求转发到 socks 上 让 iOS 使用 SSH 代理访问 Web 服务思路是在本地局域网内想办法建立一个 SSH 代理，然后让 iOS 设备将请求转发到这个代理上。 我们在一台 Macbook 和一个 iPad 的环境下实现这样的操作。具体操作步骤如下： 在 Macbook（IP 地址是 192.168.0.8） 上搭建一个 SSH 代理 ssh -g -N -D 192.168.0.8:8000 mypc # -g 表示外部机器可以连到这个地址 创建一个PAC文件 proxy.pac，指定如何配置proxy。 123function FindProxyForURL(url, host) &#123; return &quot;SOCKS 192.168.0.8:8000&quot;;&#125; 在 Macbook 上开启 web 服务，并将 proxy 文件放在 web 服务上。 cp proxy.pac /Library/WebServer/Documents sudo apachectl start 可以通过 http://192.168.0.8/proxy.pac 访问这个代理文件。 在iOS上设置。 通过“Settings”-&gt;”WLAN Networks”找到现在连上的Wifi，查看details（蓝色箭头）在最下面有设置http proxy的地方。选择”Auto”, 填入 http://192.168.0.8/proxy.pac （注意：需要添加 http 头） Done！ 这样在 Macbook 开启代理的情况下，iOS 设备可以通过该代理访问web服务。 参考： Mac OS X 启用 Web 服务器 让iOS使用SSH Tunnel 关于工具 Alfred 常用插件 Dict Kill Process TerminalFinder IP Address Atom 常用插件 atom-beautify autocomplete-python vim-mode-plus platformio-ide-terminal go-plus Remote FTP Visual Studio Code Zotero (这在 Zotero 使用笔记 讲过) Vim 环境配置使用 The Ultimate vimrc Emacs 环境配置使用 spacemacs]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
       <tags>
         <tag>usage-notes</tag>
         <tag>mac</tag>
@@ -29,8 +46,8 @@
         <category>tools</category>
       </categories>
       <tags>
-        <tag>ssh</tag>
         <tag>usage-notes</tag>
+        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
@@ -41,8 +58,8 @@
         <category>tools</category>
       </categories>
       <tags>
-        <tag>usage-notes</tag>
         <tag>zotero</tag>
+        <tag>usage-notes</tag>
       </tags>
   </entry>
 </search>

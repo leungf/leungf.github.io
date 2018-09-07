@@ -106,27 +106,27 @@
 
 
 
-  <meta name="description" content="Zotero 是一个免费的文献管理工具。关于 Zotero 的使用推荐阳志平老师的博客：  (1) 文献管理软件Zotero基础及进阶示范 (2) 作为知识管理工具的Zotero (3) 平板与社交：再谈研究辅助工具Zotero兼配套APP (4) Zotero之Zotfile插件的使用 (5) 电子文献管理攻略 (6) 如何批量下载PDF  本文主要介绍几个比较有用的插件和自己平时的操作流程。">
-<meta name="keywords" content="zotero,usage-notes">
+  <meta name="description" content="前段时间用 Express (PugJS) + MongoDB + Scrapy 建了一个视频索引网站。现在简单总结一下。 搭建网站前端开发首先，不得不说使用 MongoDB 建站是一件很方便的事情。后台 Model 有任何改动，只需要在 mongoose 加一个字段就可以了，相比于关系型数据库的严格类型约束，Object DB 更适合迭代开发。不过在性能上 mongodb 在后期有些吃力，特别是">
+<meta name="keywords" content="express,mongodb,pugjs,scrapy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zotero 使用笔记">
-<meta property="og:url" content="https://leungf.github.io/2017/10/13/zotero-notes/index.html">
+<meta property="og:title" content="Express + MongoDB + PugJs 开发总结">
+<meta property="og:url" content="https://leungf.github.io/2018/03/23/express-mongodb-website/index.html">
 <meta property="og:site_name" content="L.Dragon Blog">
-<meta property="og:description" content="Zotero 是一个免费的文献管理工具。关于 Zotero 的使用推荐阳志平老师的博客：  (1) 文献管理软件Zotero基础及进阶示范 (2) 作为知识管理工具的Zotero (3) 平板与社交：再谈研究辅助工具Zotero兼配套APP (4) Zotero之Zotfile插件的使用 (5) 电子文献管理攻略 (6) 如何批量下载PDF  本文主要介绍几个比较有用的插件和自己平时的操作流程。">
+<meta property="og:description" content="前段时间用 Express (PugJS) + MongoDB + Scrapy 建了一个视频索引网站。现在简单总结一下。 搭建网站前端开发首先，不得不说使用 MongoDB 建站是一件很方便的事情。后台 Model 有任何改动，只需要在 mongoose 加一个字段就可以了，相比于关系型数据库的严格类型约束，Object DB 更适合迭代开发。不过在性能上 mongodb 在后期有些吃力，特别是">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://leungf.github.io/images/zotero-import-from-bibtex.png">
-<meta property="og:updated_time" content="2018-09-07T12:31:46.055Z">
+<meta property="og:image" content="https://leungf.github.io/images/express-mongo-clustrmaps.png">
+<meta property="og:updated_time" content="2018-09-07T12:59:05.625Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zotero 使用笔记">
-<meta name="twitter:description" content="Zotero 是一个免费的文献管理工具。关于 Zotero 的使用推荐阳志平老师的博客：  (1) 文献管理软件Zotero基础及进阶示范 (2) 作为知识管理工具的Zotero (3) 平板与社交：再谈研究辅助工具Zotero兼配套APP (4) Zotero之Zotfile插件的使用 (5) 电子文献管理攻略 (6) 如何批量下载PDF  本文主要介绍几个比较有用的插件和自己平时的操作流程。">
-<meta name="twitter:image" content="https://leungf.github.io/images/zotero-import-from-bibtex.png">
+<meta name="twitter:title" content="Express + MongoDB + PugJs 开发总结">
+<meta name="twitter:description" content="前段时间用 Express (PugJS) + MongoDB + Scrapy 建了一个视频索引网站。现在简单总结一下。 搭建网站前端开发首先，不得不说使用 MongoDB 建站是一件很方便的事情。后台 Model 有任何改动，只需要在 mongoose 加一个字段就可以了，相比于关系型数据库的严格类型约束，Object DB 更适合迭代开发。不过在性能上 mongodb 在后期有些吃力，特别是">
+<meta name="twitter:image" content="https://leungf.github.io/images/express-mongo-clustrmaps.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://leungf.github.io/2017/10/13/zotero-notes/"/>
+  <link rel="canonical" href="https://leungf.github.io/2018/03/23/express-mongodb-website/"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>Zotero 使用笔记 | L.Dragon Blog</title>
+  <title>Express + MongoDB + PugJs 开发总结 | L.Dragon Blog</title>
   
 
 
@@ -335,7 +335,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://leungf.github.io/2017/10/13/zotero-notes/">
+    <link itemprop="mainEntityOfPage" href="https://leungf.github.io/2018/03/23/express-mongodb-website/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fan Liang">
@@ -352,7 +352,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Zotero 使用笔记
+          <h1 class="post-title" itemprop="name headline">Express + MongoDB + PugJs 开发总结
               
             
           </h1>
@@ -377,7 +377,7 @@
                 
               
 
-              <time title="创建时间：2017-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2017-10-13T00:00:00+08:00">2017-10-13</time>
+              <time title="创建时间：2018-03-23 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-23T00:00:00+08:00">2018-03-23</time>
             
 
             
@@ -394,7 +394,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-07 20:31:46" itemprop="dateModified" datetime="2018-09-07T20:31:46+08:00">2018-09-07</time>
+                <time title="修改时间：2018-09-07 20:59:05" itemprop="dateModified" datetime="2018-09-07T20:59:05+08:00">2018-09-07</time>
               
             
           </span>
@@ -411,7 +411,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">development</span></a></span>
 
                 
                 
@@ -426,10 +426,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/13/zotero-notes/#comments" itemprop="discussionUrl">
+                <a href="/2018/03/23/express-mongodb-website/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/13/zotero-notes/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/03/23/express-mongodb-website/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -457,55 +457,26 @@
       
 
       
-        <p>Zotero 是一个免费的文献管理工具。关于 Zotero 的使用推荐<a href="http://www.yangzhiping.com/" target="_blank" rel="noopener">阳志平</a>老师的博客：</p>
-<ul>
-<li><a href="http://www.yangzhiping.com/tech/zotero1.html" target="_blank" rel="noopener">(1) 文献管理软件Zotero基础及进阶示范</a></li>
-<li><a href="http://www.yangzhiping.com/tech/zotero2.html" target="_blank" rel="noopener">(2) 作为知识管理工具的Zotero</a></li>
-<li><a href="http://www.yangzhiping.com/tech/zotero3.html" target="_blank" rel="noopener">(3) 平板与社交：再谈研究辅助工具Zotero兼配套APP</a></li>
-<li><a href="http://www.yangzhiping.com/tech/zotero4.html" target="_blank" rel="noopener">(4) Zotero之Zotfile插件的使用</a></li>
-<li><a href="http://www.yangzhiping.com/tech/zotero5.html" target="_blank" rel="noopener">(5) 电子文献管理攻略</a></li>
-<li><a href="http://www.yangzhiping.com/tech/zotero6.html" target="_blank" rel="noopener">(6) 如何批量下载PDF</a></li>
-</ul>
-<p>本文主要介绍几个比较有用的插件和自己平时的操作流程。</p>
-<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><h2 id="Zotfile-link"><a href="#Zotfile-link" class="headerlink" title="Zotfile (link)"></a>Zotfile (<a href="https://github.com/jlegewie/zotfile" target="_blank" rel="noopener">link</a>)</h2><p>主要功能包括，文件重命名，导出 PDF 文件到指定目录，与云存储配合实现扩平台阅读。</p>
-<h2 id="Better-Bib-La-Tex（link）-已过时，zotero-支持-clipboard-导入，看-tips5"><a href="#Better-Bib-La-Tex（link）-已过时，zotero-支持-clipboard-导入，看-tips5" class="headerlink" title="Better Bib(La)Tex（link）(已过时，zotero 支持 clipboard 导入，看 tips5 )"></a>Better Bib(La)Tex（<a href="https://github.com/retorquere/zotero-better-bibtex" target="_blank" rel="noopener">link</a>）(已过时，zotero 支持 clipboard 导入，看 <a href="#tips5">tips5</a> )</h2><p>Zotero 本身不支持 Bibtex 格式导入文章条目。该插件弥补了这一不足。</p>
-<p>使用时，将 Bibtex 信息复制到 clipboard 中，然后选择 <code>import from clipboard</code> 即可。</p>
-<p><img src="/images/zotero-import-from-bibtex.png" alt="zotero-import-from-bibtex"></p>
-<h2 id="Markdown-Here（link）"><a href="#Markdown-Here（link）" class="headerlink" title="Markdown Here（link）"></a>Markdown Here（<a href="https://github.com/adam-p/markdown-here" target="_blank" rel="noopener">link</a>）</h2><p>使用 markdown 编写文章笔记，然后用 <code>ctrl+alt+m</code> 组合键将文本变为 html。该插件需要自行<a href="https://github.com/adam-p/markdown-here#firefoxthunderbird-extension" target="_blank" rel="noopener">编译 xpi 插件包</a>。</p>
-<h2 id="Google-Scholar-Citation（link）"><a href="#Google-Scholar-Citation（link）" class="headerlink" title="Google Scholar Citation（link）"></a>Google Scholar Citation（<a href="https://github.com/beloglazov/zotero-scholar-citations" target="_blank" rel="noopener">link</a>）</h2><p>查找文章的引用数，将引用信息填入 extra 字段中。</p>
-<p>P.S. 最新版本的插件可能会不工作，可以使用老版本的插件(例如 <a href="https://raw.githubusercontent.com/beloglazov/zotero-scholar-citations/master/builds/zotero-scholar-citations-1.8.4-fx.xpi" target="_blank" rel="noopener">v1.8.4</a>)。如果一次更新太多会被 Google 认为是 Robot，限制访问。</p>
-<h1 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h1><p>[预备] 同步到 webDAV 上（使用 <a href="https://www.digitalocean.com/" target="_blank" rel="noopener">digital ocean</a> 的私服<a href="https://www.digitalocean.com/community/tutorials/how-to-configure-webdav-access-with-apache-on-ubuntu-14-04" target="_blank" rel="noopener">搭建</a>）</p>
+        <p>前段时间用 Express (PugJS) + MongoDB + Scrapy 建了一个视频索引网站。现在简单总结一下。</p>
+<h1 id="搭建网站"><a href="#搭建网站" class="headerlink" title="搭建网站"></a>搭建网站</h1><h2 id="前端开发"><a href="#前端开发" class="headerlink" title="前端开发"></a>前端开发</h2><p>首先，不得不说使用 MongoDB 建站是一件很方便的事情。后台 Model 有任何改动，只需要在 mongoose 加一个字段就可以了，相比于关系型数据库的严格类型约束，Object DB 更适合迭代开发。不过在性能上 mongodb 在后期有些吃力，特别是服务器配置不高的时候，mongodb 对内存的压力还是不小，不过这都是后话。在实现 search 和 related document 功能的时候，偷懒使用 MongoDB 的全文检索功能，性能不高，基本可以，适用于原型设计。</p>
+<p>其次，Express 管理服务端逻辑。我采用传统的 MVC 将文件分为 controller、model、view 三个部分。controller 负载页面响应和数据获取，model 就是定义 mongoose 中 document 的字段，以及一些基本的存储逻辑（比如用户登录的密码验证，加密等操作），view 这部分我采用的 pugjs 进行前端页面渲染，pugjs 本质上还是 javascript 所以操作前端页面按照 JS 的逻辑来写就行了，不过开发过程中自己会把很多字符串处理逻辑都写在 PUG 中，感觉不是太好。</p>
+<p>再次，就是前端 JS 的 IE 兼容问题。因为习惯使用 es2015 来写，在实际运行的时候发现在 chrome、firefox 下跑的很好，但是在 IE 上就出现各种问题。解决方法是用 babel 的 es2015-ie 插件进行兼容转换。</p>
+<p>最后，Mobile 和 Destop 的支持，采用 Bootstrap 进行响应式布局，对于 CSS 不是特别熟悉，所以没有过多的研究响应式布局的细节。</p>
+<h2 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h2><p>建站的前提是有稳定的数据源，因为自己不做 CMS，所以内容方面全部依赖爬取站点的内容质量。在此，不做详述。</p>
+<p>数据爬取使用 scrapy 框架，只是使用了基本的功能。对于分布式、IP 池等没有涉及。每个站点都写了一个 Spider。从 Spider 到 Server Model 还有一段路要走，也就是说爬下来的时候需要清洗才能入库呈现。这部分的 pipeline 我是这么设计的：</p>
 <ol>
-<li>文件导入（一般是 connector 或 bibtex）；</li>
-<li>批量下载 （<a href="https://chrome.google.com/webstore/detail/chrono-download-manager/mciiogijehkdemklbdcbfkefimifhecn" target="_blank" rel="noopener">chrono download</a>），并创建索引（Create Bibliography from Item）；</li>
-<li>更新 scholar citation（Google Scholar Citation）；</li>
-<li>使用 Zotfile 发送到共享文件夹 （Google Drive），使用 IPad 浏览（PDF Expert）并记录笔记然后再用 Zotfile [Get from Tablet] 同步回 Zotero；</li>
-<li>在条目中创建 notes ，使用 markdown 语法做笔记（markdown here）。</li>
+<li>scrapy 爬取元数据，包括视频播放连接和元信息两部分；</li>
+<li>经过 join 将视频信息和元信息进行合并，然后剔除不符合要求的数据，进入 model 库；</li>
+<li>对数据进行回查，相当于是对 model 库进行清洗，主要就是剔除失效的视频连接，这部分可以定期处理（一个简单粗暴的 CMS 功能）。</li>
 </ol>
-<p>另外，阳的博客（6）中使用的 chrome 插件已经过时，更新为 <a href="https://chrome.google.com/webstore/detail/chrono-download-manager/mciiogijehkdemklbdcbfkefimifhecn" target="_blank" rel="noopener">Chrono Download Manager</a>。</p>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol>
-<li><p>递归显示 collection 中所有项目信息 (<a href="https://www.zotero.org/support/preferences/hidden_preferences" target="_blank" rel="noopener">Hidden Perferences</a>)</p>
-<p> 希望实现的功能是，点击一个 collection 可以显示 sub-collection 的项目。Zotero 默认情况是不显示的。这个问题之前有人在 Zotero <a href="https://forums.zotero.org/discussion/3317/recursive-display-of-all-items-of-a-collection-and-its-sub-collections" target="_blank" rel="noopener">社区问过</a>。</p>
-<p> 解决方法是通过修改 Hidden Preference 文件中的 <code>extensions.zotero.recursiveCollections</code> 字段，将其修改为 true 即可。  </p>
-<p> Zotero 的配置文件包括一般可用文件和隐藏文件。隐藏文件的修改可以进入 Advanced (Panel)，选择 <code>open:config</code> 进行修改（当前 Zotero 版本是 4.0.29.15）。</p>
-</li>
-<li><p>显示 collection 目录下文件个数 (<a href="https://www.zotero.org/support/tips_and_tricks" target="_blank" rel="noopener">tips_and_tricks</a>)</p>
-<p> To see how many items you have, click an item in the middle pane and Select All (Command-A on macOS or Control-A on Windows/Linux). A count of selected items will appear in the right-hand pane.</p>
-</li>
-<li><p>批量展开与折叠项目信息</p>
-<p> To determine total items, including child attachments and notes, click an item and press the + (plus) key to expand all parent items before using Select All. You can press - (minus) afterward to collapse all items.</p>
-</li>
-<li><p>查看一个条目在哪些目录（<a href="https://www.zotero.org/support/kb/collections_containing_an_item" target="_blank" rel="noopener">tips_and_tricks</a>）</p>
-<p> To see all the collections an item is in, select the item and then hold down the “Option” key (Mac OS X), “Control” key (Windows), or “Alt” key (Linux). This will highlight all collections that contain the selected item.</p>
-</li>
-<li><p><span id="tips5">从粘贴板导入条目</span>（<a href="https://www.zotero.org/support/kb/import_from_clipboard" target="_blank" rel="noopener">How does the Import from Clipboard feature work?</a>）</p>
-<p> Import from Clipboard allows you to import items from the raw code of any supported format (RIS, BibTeX, CSL JSON, etc.). Many websites post the bibliographic data for items in their raw form. To add these items to your Zotero library, select and copy the code from the site, then import through the option in File menu in Zotero, or by the keyboard shortcut <strong>(Windows/Linux: Ctrl-Alt-Shift-I / Mac: Cmd-Option-Shift-I)</strong>.</p>
-</li>
-</ol>
-<h1 id="TODO-List"><a href="#TODO-List" class="headerlink" title="TODO List"></a>TODO List</h1><p>关于插件：</p>
-<ul>
-<li><a href="https://github.com/corajr/zotero-voyant-export/" target="_blank" rel="noopener">voyant-export</a> 可以对储存在Zotero里的文字信息进行进一步分析，生成云图或者其它数据可视化图像。</li>
-</ul>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>至此，站点就被搭建起来了，是不是很简单。因为没有数据维护（或者可以说是很简单的数据维护），一切数据依赖被爬取站点的数据质量。这种寄人篱下的站点建设方法不知道什么时候就会因为目标网站的升级需要更新自己的 spider 逻辑。</p>
+<p>而且，随着 mongodb 中的数据越来越多，查询性能和 search 性能都在下降（前提是服务器不升级，512 MB 内存 1 CPU，6万多条记录，related search 的响应时间在 10-20 sec，find by index 的响应时间在 1-3 sec， findById 的的响应时间在 200-600 ms）。</p>
+<p>此外，网站监控使用第三方服务，包括 google analysis、whos.amung.us、histats、clustrmaps 等，whos 主要监控实时的视频播放人数，histats 监控网站的访问，clustrmaps 这个主要是对旧版页面的监控。google analysis 分析整个网站的访问情况。</p>
+<p><strong>SEO</strong>：设置了 sitemap 和 robots，对页面的 meta 进行了简单的设计，但效果不是太理想，现在也在摸索。</p>
+<p><strong>反爬虫</strong>：还没做。</p>
+<h1 id="未来发展"><a href="#未来发展" class="headerlink" title="未来发展"></a>未来发展</h1><p>这个站点就这样了吧，作为一个练手的站点，未来最多也就是更新数据源了。不过以后想用 vue 或者 react 写个单页面的网站。将前端和后端数据完全分离，现在 pug 渲染的时候，还是会将一部分 control 逻辑混写在 view 中。期待前后端数据和渲染的完全分离。</p>
+<p>最后贴一个现在 clustrmaps 统计的访问情况，以示纪念。</p>
+<p><img src="/images/express-mongo-clustrmaps.png" alt="clustrmaps"></p>
 
       
     </div>
@@ -526,9 +497,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/zotero/" rel="tag"># zotero</a>
+            <a href="/tags/express/" rel="tag"># express</a>
           
-            <a href="/tags/usage-notes/" rel="tag"># usage-notes</a>
+            <a href="/tags/mongodb/" rel="tag"># mongodb</a>
+          
+            <a href="/tags/pugjs/" rel="tag"># pugjs</a>
+          
+            <a href="/tags/scrapy/" rel="tag"># scrapy</a>
           
         </div>
       
@@ -541,14 +516,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/11/01/mac-usage/" rel="next" title="Mac 使用笔记">
+                <i class="fa fa-chevron-left"></i> Mac 使用笔记
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/17/ssh-proxy/" rel="prev" title="SSH 转发与代理">
-                SSH 转发与代理 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/05/cryptocurrency/" rel="prev" title="采用矿池进行虚拟货币挖矿 v.s  独立挖矿">
+                采用矿池进行虚拟货币挖矿 v.s  独立挖矿 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -717,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#插件"><span class="nav-number">1.</span> <span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Zotfile-link"><span class="nav-number">1.1.</span> <span class="nav-text">Zotfile (link)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Better-Bib-La-Tex（link）-已过时，zotero-支持-clipboard-导入，看-tips5"><span class="nav-number">1.2.</span> <span class="nav-text">Better Bib(La)Tex（link）(已过时，zotero 支持 clipboard 导入，看 tips5 )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown-Here（link）"><span class="nav-number">1.3.</span> <span class="nav-text">Markdown Here（link）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Scholar-Citation（link）"><span class="nav-number">1.4.</span> <span class="nav-text">Google Scholar Citation（link）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工作流"><span class="nav-number">2.</span> <span class="nav-text">工作流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips"><span class="nav-number">2.1.</span> <span class="nav-text">Tips</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TODO-List"><span class="nav-number">3.</span> <span class="nav-text">TODO List</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建网站"><span class="nav-number">1.</span> <span class="nav-text">搭建网站</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前端开发"><span class="nav-number">1.1.</span> <span class="nav-text">前端开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据获取"><span class="nav-number">1.2.</span> <span class="nav-text">数据获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">1.3.</span> <span class="nav-text">写在最后</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#未来发展"><span class="nav-number">2.</span> <span class="nav-text">未来发展</span></a></li></ol></div>
             
 
           </div>
@@ -881,9 +860,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'https://leungf.github.io/2017/10/13/zotero-notes/';
-        this.page.identifier = '2017/10/13/zotero-notes/';
-        this.page.title = 'Zotero 使用笔记';
+        this.page.url = 'https://leungf.github.io/2018/03/23/express-mongodb-website/';
+        this.page.identifier = '2018/03/23/express-mongodb-website/';
+        this.page.title = 'Express + MongoDB + PugJs 开发总结';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');

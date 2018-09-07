@@ -107,7 +107,7 @@
 
 
   <meta name="description" content="利用 SSH 可以方便的搭建本地代理访问互联网。本文介绍如何跨节点访问远程主机，并在此基础上建立代理。  Secure Shell（缩写为SSH），由IETF的网络工作小组（Network Working Group）所制定；SSH为一项创建在应用层和传输层基础上的安全协议，为计算机上的Shell（壳层）提供安全的传输和使用环境。— from wikipedia  基于 SSH 的本地代理使用 S">
-<meta name="keywords" content="ssh,usage-notes">
+<meta name="keywords" content="usage-notes,ssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH 转发与代理">
 <meta property="og:url" content="https://leungf.github.io/2017/10/17/ssh-proxy/index.html">
@@ -289,7 +289,17 @@
 
   
 
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+    MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+</script>
 
 </div>
     </header>
@@ -485,9 +495,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ssh/" rel="tag"># ssh</a>
-          
             <a href="/tags/usage-notes/" rel="tag"># usage-notes</a>
+          
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
           
         </div>
       
@@ -592,7 +602,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -609,7 +619,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   
                 </div>
@@ -634,7 +646,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
