@@ -530,7 +530,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-07 19:43:44" itemprop="dateModified" datetime="2018-09-07T19:43:44+08:00">2018-09-07</time>
+                <time title="修改时间：2018-09-07 19:47:40" itemprop="dateModified" datetime="2018-09-07T19:47:40+08:00">2018-09-07</time>
               
             
           </span>
@@ -620,7 +620,10 @@
 </ul>
 <p>值得注意的是上述配置中的 worker 和 email 需要正确填写，之后在 nanopool 网站上，根据这两个值可以调整最小提取额度。</p>
 <h3 id="收益">收益</h3>
-<p>以 ETH 为例。nanopool 在7月9日当天的 ETH 平均算力为 42122.7 Gh/s，每 24 小时挖到的普通块数为 686，叔块数为315。省略叔块的奖励，1 Gh/s 的算力当天可以分得的收益为 $ 5*686/42122.7=0.081428778 $ ETH。</p>
+<p>以 ETH 为例。nanopool 在7月9日当天的 ETH 平均算力为 42122.7 Gh/s，每 24 小时挖到的普通块数为 686，叔块数为315。省略叔块的奖励，1 Gh/s 的算力当天可以分得的收益为 <span class="math display">\[ 5*686/42122.7=0.081428778 \]</span> ETH。</p>
+<p><span class="math display">\[\begin{equation}
+e=mc^2
+\end{equation}\label{eq1}\]</span></p>
 <h2 id="独立节点挖矿">独立节点挖矿</h2>
 <p>独立挖矿的好处在于挖到 Eth 所得的奖励独享，坏处在于需要与大矿池竞争算力。本文中设置的挖矿拓扑为一个主网节点和多个挖矿节点。其中，主网节点用来同步全账本信息，运行 geth 程序；挖矿节点仅负责计算，运行 ethminer 程序。以下是账本同步与挖矿运行的脚步：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主网同步节点</span></span><br><span class="line">./bin/geth --rpc \</span><br><span class="line">    --syncmode <span class="string">"fast"</span> \</span><br><span class="line">    --rpcaddr <span class="string">"0.0.0.0"</span> \</span><br><span class="line">    --rpcport <span class="string">"8545"</span> \</span><br><span class="line">    --rpccorsdomain <span class="string">"*"</span> \</span><br><span class="line">    --datadir <span class="string">"/mnt/data/eth-data/data"</span> \</span><br><span class="line">    --ethash.dagdir <span class="string">"/mnt/data/eth-data/dag"</span> \</span><br><span class="line">    --etherbase <span class="string">"..."</span> \</span><br><span class="line">    --rpcapi <span class="string">"personal,db,eth,net,web3"</span> \</span><br><span class="line">    console 2&gt;&amp;1 | tee geth.log</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 主网节点开放端口</span></span><br><span class="line">sudo iptables -A INPUT -p tcp \</span><br><span class="line">    --dport 8545 -m conntrack \</span><br><span class="line">    --ctstate NEW,ESTABLISHED -j ACCEPT</span><br><span class="line">或</span><br><span class="line">sudo ufw allow 8545</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挖矿节点</span></span><br><span class="line">wallet_addr=<span class="string">"..."</span></span><br><span class="line">ethnet_addr=<span class="string">"..."</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## use nvidia gpu</span></span><br><span class="line">./ethminer --farm-recheck 2000 \</span><br><span class="line">    -U -P http://<span class="variable">$&#123;wallet_addr&#125;</span>@<span class="variable">$&#123;ethnet_addr&#125;</span></span><br></pre></td></tr></table></figure>
@@ -629,17 +632,6 @@
 <ol style="list-style-type: decimal">
 <li><a href="http://ethereumdocch.readthedocs.io/zh/latest/mining.html" target="_blank" rel="noopener">Ethereum Homestead中文文档/挖矿</a></li>
 </ol>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
-    MathJax.Hub.Config({
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        },
-        "HTML-CSS": { availableFonts: ["TeX"] }
-    });
-</script>
 
           
         
