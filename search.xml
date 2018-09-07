@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[post]]></title>
+    <url>%2F2018%2F09%2F07%2Fpost%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[采用矿池进行虚拟货币挖矿 v.s 独立挖矿]]></title>
+    <url>%2F2018%2F07%2F05%2Fcryptocurrency%2F</url>
+    <content type="text"><![CDATA[本文简述了采用矿池挖矿和 Solo 方式挖矿的方法。 综合比较而言，对于小算力的运行环境（1 GH/s），矿池挖矿具有少量的稳定收益（nanopool 为例，约 0.08 ETH/day）。 Solo 方式在主链上与大矿池竞争算力，一天能挖到一个区块的概率不足 2%。 矿池挖矿 v.s 独立挖矿 采用矿池进行挖矿 该方案可以看做是将算力租借给矿池，矿池根据你贡献的算力给与提成，提成的方式是将挖出的代币按照比例转移到挖矿账户上。这种方案需要的条件包括： 可以挖取代币的硬件环境和挖矿软件 代币地址 可加入的合适矿池 本说明以 nanopool 矿池和基于 MetaMask 的 Ethereum 地址为例对挖矿过程进行阐述。 首先，需要一个可以挖矿的硬件环境，本文默认认为已经有一台安装好 NVIDIA GPU 的服务器。 其次，准备好自己的加密货币地址。该地址可以是交易所的充币地址，可以是 MetaMask 的 Ethereum 地址，还可以是本地钱包的地址，因为最后需要矿池将代币转移给你自己。以 MetaMask 为例，直接复制 Ethernet 的 Address (Copy Address to Clipboard)，可以得到该地址。 再来，需要选择合适的挖矿软件。本文选择如下软件进行挖矿 ethminer 作为 Ethereum 的挖矿软件 xmr-stak 作为 Monero 的挖矿软件 最后，配置好参数运行挖矿软件就可以了。相关配置参数如下： ethminer 的配置参数如下 123456789101112export GPU_FORCE_64BIT_PTR=0export GPU_MAX_HEAP_SIZE=100export GPU_USE_SYNC_OBJECTS=1export GPU_MAX_ALLOC_PERCENT=100export GPU_SINGLE_ALLOC_PERCENT=100addr=....worker=....email=...../ethminer --farm-recheck 2000 -U \ -P stratum1+tcp://$&#123;addr&#125;@eth-asia1.nanopool.org:9999/$&#123;worker&#125;/$&#123;email&#125; xmr-stak 的配置参数如下 12345addr=....worker=....email=...../xmr-stak -O xmr-asia1.nanopool.org:14433 -u $&#123;addr&#125;.$&#123;worker&#125;/$&#123;email&#125; --currency monero7 值得注意的是上述配置中的 worker 和 email 需要正确填写，之后在 nanopool 网站上，根据这两个值可以调整最小提取额度。 收益 以 ETH 为例。nanopool 在7月9日当天的 ETH 平均算力为 42122.7 Gh/s，每 24 小时挖到的普通块数为 686，叔块数为315。省略叔块的奖励，1 Gh/s 的算力当天可以分得的收益为 $ 5*686/42122.7=0.081428778 $ ETH。 独立节点挖矿 独立挖矿的好处在于挖到 Eth 所得的奖励独享，坏处在于需要与大矿池竞争算力。本文中设置的挖矿拓扑为一个主网节点和多个挖矿节点。其中，主网节点用来同步全账本信息，运行 geth 程序；挖矿节点仅负责计算，运行 ethminer 程序。以下是账本同步与挖矿运行的脚步： 1234567891011121314151617181920212223242526# 主网同步节点./bin/geth --rpc \ --syncmode "fast" \ --rpcaddr "0.0.0.0" \ --rpcport "8545" \ --rpccorsdomain "*" \ --datadir "/mnt/data/eth-data/data" \ --ethash.dagdir "/mnt/data/eth-data/dag" \ --etherbase "..." \ --rpcapi "personal,db,eth,net,web3" \ console 2&gt;&amp;1 | tee geth.log # 主网节点开放端口sudo iptables -A INPUT -p tcp \ --dport 8545 -m conntrack \ --ctstate NEW,ESTABLISHED -j ACCEPT或sudo ufw allow 8545# 挖矿节点wallet_addr="..."ethnet_addr="..."## use nvidia gpu./ethminer --farm-recheck 2000 \ -U -P http://$&#123;wallet_addr&#125;@$&#123;ethnet_addr&#125; 关于挖矿的可能性可以参考 Ethereum 的算力统计图。从15年以来，入块的最低算力是 11.5297 GH/s。以 7月9日当天的平均算力为 292711.4538 GH/s。如果是 1GH/s 的算力在7月9日当天挖到一个区块的可能性为 1/292711.4538 * (60*60*24)/15 = 0.019678082 （ETH 区块产生速率为 15 秒一个 Block）。 参考资料 Ethereum Homestead中文文档/挖矿 MathJax.Hub.Config({ extensions: ["tex2jax.js"], jax: ["input/TeX", "output/HTML-CSS"], tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], displayMath: [ ['$$','$$'], ["\\[","\\]"] ], }, "HTML-CSS": { availableFonts: ["TeX"] } });]]></content>
+      <categories>
+        <category>cryptocurrency</category>
+      </categories>
+      <tags>
+        <tag>cryptocurrency</tag>
+        <tag>mining</tag>
+      </tags>
+  </entry>
+</search>
