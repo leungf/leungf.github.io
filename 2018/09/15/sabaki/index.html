@@ -106,25 +106,29 @@
 
 
 
-  <meta name="description" content="const 标识符 助记法：将星号读作“指针”，将const读作“常量”的话，int const * n 是常量指针；int *const n 是指针常量。  常量指针：指针指向的内容是常量  常量指针说的是不能通过这个指针改变变量的值，但是还是可以通过其他的引用来改变变量的值的； 常量指针指向的值不能改变，但是这并不是意味着指针本身不能改变，常量指针可以指向其他的地址。   指针常量：指针本身是">
-<meta name="keywords" content="c">
+  <meta name="description" content="Sabaki + Leela-Zero + Leelasabaki本文主要阐述在 Windows/Linux 环境下搭建围棋 AI 的过程。使用到的软件栈为：  Sabaki：一个跨平台的围棋（Go）棋盘和 SGF 编辑工具。 LeelaSabaki：Leela (Zero) integration with Sabaki. Leela-Zero：一个 AlphaGo Zero 论文 的开源实现">
+<meta name="keywords" content="weiqi,go,sabaki,leela-zero">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C 语义笔记">
-<meta property="og:url" content="https://leungf.github.io/2018/10/20/c-language/index.html">
+<meta property="og:title" content="基于 Sabaki 搭建围棋 AI">
+<meta property="og:url" content="https://leungf.github.io/2018/09/15/sabaki/index.html">
 <meta property="og:site_name" content="L.Dragon Blog">
-<meta property="og:description" content="const 标识符 助记法：将星号读作“指针”，将const读作“常量”的话，int const * n 是常量指针；int *const n 是指针常量。  常量指针：指针指向的内容是常量  常量指针说的是不能通过这个指针改变变量的值，但是还是可以通过其他的引用来改变变量的值的； 常量指针指向的值不能改变，但是这并不是意味着指针本身不能改变，常量指针可以指向其他的地址。   指针常量：指针本身是">
+<meta property="og:description" content="Sabaki + Leela-Zero + Leelasabaki本文主要阐述在 Windows/Linux 环境下搭建围棋 AI 的过程。使用到的软件栈为：  Sabaki：一个跨平台的围棋（Go）棋盘和 SGF 编辑工具。 LeelaSabaki：Leela (Zero) integration with Sabaki. Leela-Zero：一个 AlphaGo Zero 论文 的开源实现">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-20T02:12:01.194Z">
+<meta property="og:image" content="https://leungf.github.io/images/sabaki/engines-mg.png">
+<meta property="og:image" content="https://leungf.github.io/images/sabaki/engines-attach.png">
+<meta property="og:image" content="https://leungf.github.io/images/sabaki/leelazero-params.png">
+<meta property="og:updated_time" content="2018-12-10T02:44:05.824Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C 语义笔记">
-<meta name="twitter:description" content="const 标识符 助记法：将星号读作“指针”，将const读作“常量”的话，int const * n 是常量指针；int *const n 是指针常量。  常量指针：指针指向的内容是常量  常量指针说的是不能通过这个指针改变变量的值，但是还是可以通过其他的引用来改变变量的值的； 常量指针指向的值不能改变，但是这并不是意味着指针本身不能改变，常量指针可以指向其他的地址。   指针常量：指针本身是">
+<meta name="twitter:title" content="基于 Sabaki 搭建围棋 AI">
+<meta name="twitter:description" content="Sabaki + Leela-Zero + Leelasabaki本文主要阐述在 Windows/Linux 环境下搭建围棋 AI 的过程。使用到的软件栈为：  Sabaki：一个跨平台的围棋（Go）棋盘和 SGF 编辑工具。 LeelaSabaki：Leela (Zero) integration with Sabaki. Leela-Zero：一个 AlphaGo Zero 论文 的开源实现">
+<meta name="twitter:image" content="https://leungf.github.io/images/sabaki/engines-mg.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://leungf.github.io/2018/10/20/c-language/"/>
+  <link rel="canonical" href="https://leungf.github.io/2018/09/15/sabaki/"/>
 
 
 
@@ -134,7 +138,7 @@
   };
 </script>
 
-  <title>C 语义笔记 | L.Dragon Blog</title>
+  <title>基于 Sabaki 搭建围棋 AI | L.Dragon Blog</title>
   
 
 
@@ -333,7 +337,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://leungf.github.io/2018/10/20/c-language/">
+    <link itemprop="mainEntityOfPage" href="https://leungf.github.io/2018/09/15/sabaki/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LF">
@@ -350,7 +354,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C 语义笔记
+          <h1 class="post-title" itemprop="name headline">基于 Sabaki 搭建围棋 AI
               
             
           </h1>
@@ -375,16 +379,46 @@
                 
               
 
-              <time title="创建时间：2018-10-20 10:02:21 / 修改时间：10:12:01" itemprop="dateCreated datePublished" datetime="2018-10-20T10:02:21+08:00">2018-10-20</time>
+              <time title="创建时间：2018-09-15 16:50:24" itemprop="dateCreated datePublished" datetime="2018-09-15T16:50:24+08:00">2018-09-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-10 10:44:05" itemprop="dateModified" datetime="2018-12-10T10:44:05+08:00">2018-12-10</time>
               
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Applications/" itemprop="url" rel="index"><span itemprop="name">Applications</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -394,10 +428,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/20/c-language/#comments" itemprop="discussionUrl">
+                <a href="/2018/09/15/sabaki/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/10/20/c-language/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/09/15/sabaki/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,20 +459,87 @@
       
 
       
-        <h2 id="const-标识符"><a href="#const-标识符" class="headerlink" title="const 标识符"></a>const 标识符</h2><ul>
-<li><p>助记法：将星号读作“指针”，将const读作“常量”的话，<code>int const * n</code> 是<strong>常量指针</strong>；<code>int *const n</code> 是<strong>指针常量</strong>。</p>
-</li>
-<li><p><strong>常量指针</strong>：指针指向的内容是常量</p>
+        <h1 id="Sabaki-Leela-Zero-Leelasabaki"><a href="#Sabaki-Leela-Zero-Leelasabaki" class="headerlink" title="Sabaki + Leela-Zero + Leelasabaki"></a>Sabaki + Leela-Zero + Leelasabaki</h1><p>本文主要阐述在 Windows/Linux 环境下搭建围棋 AI 的过程。使用到的软件栈为：</p>
+<ul>
+<li><a href="https://github.com/SabakiHQ/Sabaki" target="_blank" rel="noopener">Sabaki</a>：一个跨平台的围棋（Go）棋盘和 <a href="https://www.red-bean.com/sgf/" target="_blank" rel="noopener">SGF</a> 编辑工具。</li>
+<li><a href="https://github.com/SabakiHQ/LeelaSabaki" target="_blank" rel="noopener">LeelaSabaki</a>：Leela (Zero) integration with Sabaki.</li>
+<li><a href="https://github.com/gcp/leela-zero" target="_blank" rel="noopener">Leela-Zero</a>：一个 <a href="https://www.nature.com/articles/nature24270.epdf?author_access_token=VJXbVjaSHxFoctQQ4p2k4tRgN0jAjWel9jnR3ZoTv0PVW4gB86EEpGqTRDtpIz-2rmo8-KG06gqVobU5NSCFeHILHcVFUeMsbvwS-lxjqQGg98faovwjxeTUgZAUMnRQ" target="_blank" rel="noopener">AlphaGo Zero 论文</a> 的开源实现</li>
+</ul>
+<h2 id="Based-on-Windows-Play-for-fun"><a href="#Based-on-Windows-Play-for-fun" class="headerlink" title="Based on Windows (Play for fun)"></a>Based on Windows (Play for fun)</h2><p>下载如下软件的 Windows 版本和相关权值文件： </p>
+<ul>
+<li><a href="https://github.com/SabakiHQ/Sabaki/releases" target="_blank" rel="noopener">Sabaki Release</a></li>
+<li><a href="https://github.com/SabakiHQ/LeelaSabaki/releases" target="_blank" rel="noopener">LeelaSabaki Release</a></li>
+<li><a href="https://github.com/gcp/leela-zero/releases" target="_blank" rel="noopener">Leela-Zero CPU Only</a></li>
+<li><a href="http://zero.sjeng.org/" target="_blank" rel="noopener">Leela-Zero 权值文件</a></li>
+</ul>
+<p>执行如下安装过程</p>
 <ol>
-<li>常量指针说的是不能通过这个指针改变变量的值，但是还是可以通过其他的引用来改变变量的值的；</li>
-<li>常量指针指向的值不能改变，但是这并不是意味着指针本身不能改变，常量指针可以指向其他的地址。</li>
+<li>安装 Sabaki 到路径 C:\MyPrograms\Sabaki【注意：安装路径避免空格】；</li>
+<li>安装 LeelaSabaki 到路径 C:\MyPrograms\leesabaki；</li>
+<li>安装 Leela-Zero CPU Only 到路径 C:\MyPrograms\leela-zero-0.15-cpuonly-win64；</li>
+<li>解压权值文件到 C:\MyPrograms\leeazero。</li>
 </ol>
+<p>启动 Sabaki，配置 <strong>Engines-&gt;Manage Engines</strong>，如下图所示</p>
+<p><img src="/images/sabaki/engines-mg.png" alt=""></p>
+<p>配置 Engine 参数为 <code>--flat C:\MyPrograms\leela-zero-0.15-cpuonly-win64\leelaz.exe -t 6 -w C:\MyPrograms\leeazero\leelaz-model-swa-12-96000_quantized.txt --noponder</code>，其中</p>
+<ul>
+<li><code>-t</code>：表示使用CPU的6线程；</li>
+<li><code>-w</code>：表示调用权重文件；</li>
+<li><code>--noponder</code>：表示对手时间内不思考；</li>
+</ul>
+<p>然后，执行 <strong>Engines -&gt; Attach</strong> 启动对弈程序，选择黑/白为 leelazero Engine，如下图所示</p>
+<p><img src="/images/sabaki/engines-attach.png" alt=""></p>
+<p>关于 leela-zero 的参数如下所示</p>
+<p><img src="/images/sabaki/leelazero-params.png" alt=""></p>
+<h2 id="Based-on-Linux-Research"><a href="#Based-on-Linux-Research" class="headerlink" title="Based on Linux (Research)"></a>Based on Linux (Research)</h2><p>编译安装 Leela-Zero</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/gcp/leela-zero</span><br><span class="line"><span class="built_in">cd</span> leela-zero</span><br><span class="line">git submodule sync &amp;&amp; git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
+<p><span id="leelaz-dockerfile"></span></p>
+<h3 id="使用-Dockerfile-安装-Leela-Zero"><a href="#使用-Dockerfile-安装-Leela-Zero" class="headerlink" title="使用 Dockerfile 安装 Leela-Zero"></a>使用 Dockerfile 安装 Leela-Zero</h3><p>从 <code>nvidia/cuda</code> 开始构建 docker image，如下为 <code>Dockerfiles/Dockerfile.gpu</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">FROM nvidia/opencl:devel-ubuntu16.04</span><br><span class="line"></span><br><span class="line">RUN echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse&quot; &gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"># Install</span><br><span class="line">RUN apt-get -qq update</span><br><span class="line">RUN apt-get install -y apt-utils cmake g++ curl</span><br><span class="line">RUN apt-get install -y libboost-all-dev libopenblas-dev opencl-headers ocl-icd-libopencl1 ocl-icd-opencl-dev zlib1g-dev</span><br><span class="line">RUN apt-get install -y qt5-default qt5-qmake</span><br><span class="line"></span><br><span class="line">RUN mkdir -p /src/build/</span><br><span class="line">COPY . /src/</span><br><span class="line">WORKDIR /src/build/</span><br><span class="line"></span><br><span class="line"># GPU build</span><br><span class="line">RUN CXX=g++ CC=gcc cmake ..</span><br><span class="line">RUN make all -j$(nproc)</span><br><span class="line"></span><br><span class="line"># CMD cmake --build . --target leelaz --config Release -- -j2</span><br></pre></td></tr></table></figure>
+<p>在 <code>leela-zero</code> 根目录执行 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-docker build -t leelaz:gpu -f Dockerfiles/Dockerfile.gpu .</span><br></pre></td></tr></table></figure>
+<h3 id="运行自对弈程序（Self-Play）"><a href="#运行自对弈程序（Self-Play）" class="headerlink" title="运行自对弈程序（Self Play）"></a>运行自对弈程序（Self Play）</h3><p>通过 nvidia-docker 启动自对弈程序（nvidia-docker 安装参考 <a href="https://github.com/NVIDIA/nvidia-docker" target="_blank" rel="noopener">NVIDIA/nvidia-docker</a>），执行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nvidia-docker run -it \</span><br><span class="line">	-v $HOME/data/leelaz/self_play:/data \</span><br><span class="line">	-v $HOME/data/leelaz/weights:/src/build/networks \</span><br><span class="line">	leelaz:gpu \</span><br><span class="line">	./autogtp/autogtp -u 4 -k /data/sgf -d /data/debug</span><br></pre></td></tr></table></figure>
+<p>命令解释：</p>
+<ul>
+<li><p>-v：挂载自对弈棋面数据的存储路径；挂载权重文件。autogtp 默认在启动路径下找到 networks 路径加载权值。实际执行如下命令启动 leelaz </p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./leelaz --tune-only -w networks/ --gpu=...</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>指针常量</strong>：指针本身是个常量，不能在指向其他的地址</p>
-<p>  指针常量指向的地址不能改变，但是地址中保存的数值是可以改变的，可以通过其他指向改地址的指针来修改。</p>
+<li><p>-u：Index of the GPU to use for multiple GPUs support</p>
+</li>
+<li>-k：存储每局自对弈数据的路径。默认情况下，自对弈的数据会先上传到 <code>http://zero.sjeng.org/submit-match</code>，然后再存储到本地。
+  如果没有指定 <code>-k</code> 参数，自对弈数据直接被删除。</li>
+</ul>
+<h3 id="使用-Tensorflow-训练模型（Training）"><a href="#使用-Tensorflow-训练模型（Training）" class="headerlink" title="使用 Tensorflow 训练模型（Training）"></a>使用 Tensorflow 训练模型（Training）</h3><p>生成训练数据有如下两种方法</p>
+<ol>
+<li><p>运行自对弈程序，得到对弈数据，如下所示</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls ~/data/leelaz/self_play/</span><br><span class="line">257fab047b414591b6d2f1a8eb435516.sgf</span><br></pre></td></tr></table></figure>
+<p> 将自对弈数据转变为训练数据</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nvidia-docker run -it \</span><br><span class="line">	-v <span class="variable">$HOME</span>/data/leelaz/self_play:/data \</span><br><span class="line">	-v <span class="variable">$HOME</span>/data/leelaz/weights:/src/build/networks \</span><br><span class="line">	leelaz:gpu ./leelaz \</span><br><span class="line">	-w /src/build/networks/dec5b9d88877fe876a308b42370335c8f5465235d0104c889bdda3b42993aa28</span><br><span class="line"></span><br><span class="line">dump_supervised /data/257fab047b414591b6d2f1a8eb435516.sgf /data/train.out</span><br><span class="line">&lt;CTRL+C <span class="built_in">exit</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在自对弈过程中设置 debug 目录，运行</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./autogtp/autogtp -u 4 -k /data/sgf -d /data/debug</span><br></pre></td></tr></table></figure>
+<p> 在 /data/debug 目录下，除开以 <code>.debug.txt.0.gz</code> 结尾的数据，以 <code>.txt.0.gz</code> 结尾的数据为训练数据。</p>
+</li>
+</ol>
+<p>启动 tensorflow-py3 进行训练</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LEELAZ_HOME=`<span class="built_in">pwd</span>`</span><br><span class="line">nvidia-docker run -it --rm \</span><br><span class="line">	-v <span class="variable">$HOME</span>/data/leelaz:/data \</span><br><span class="line">	-v <span class="variable">$LEELAZ_HOME</span>:/src \</span><br><span class="line">	tensorflow/tensorflow:1.10.1-gpu-py3 /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /src/training/tf</span><br><span class="line">python parse.py /data/self_play/debug/*[!debug].txt.0.gz \</span><br><span class="line">	--<span class="built_in">test</span> /data/self_play/debug/*[!debug].txt.0.gz</span><br></pre></td></tr></table></figure>
+<h3 id="在-Leelaz-中使用新模型"><a href="#在-Leelaz-中使用新模型" class="headerlink" title="在 Leelaz 中使用新模型"></a>在 Leelaz 中使用新模型</h3><p>启动 leelaz 加载新模型进行对弈，如下所示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./leelaz --gpu=0 --noponder -w ../training/tf/leelaz-model-2000.txt</span><br><span class="line">genmove b</span><br><span class="line">genmove w</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="Errors"><a href="#Errors" class="headerlink" title="Errors"></a>Errors</h3><ol>
+<li><p>更新 apt 源出现网络错误。</p>
+<p> 修改 Dockerfile，添加国内的 apt source，例如 tsinghua 的 ubuntu 源。</p>
+</li>
+<li><p><code>clinfo</code> 没有找到 GPU device</p>
+<ul>
+<li><p>选择安装了 OpenCL 驱动的镜像，在 <a href="https://hub.docker.com/r/nvidia/opencl/" target="_blank" rel="noopener">nvidia/opencl hub</a> 中，选择合适的镜像源，在本文中选择 <code>devel-ubuntu16.04</code> 作为基础镜像</p>
+</li>
+<li><p>使用 <code>nvidia-docker</code> 启动镜像，如下所示</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-docker run -it --rm nvidia/opencl:devel-ubuntu16.04 /bin/bash</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><a href="https://blog.csdn.net/xingjiarong/article/details/47282255" target="_blank" rel="noopener">参考资料：C语言中const关键字的用法</a></p>
+</li>
+</ol>
 
       
     </div>
@@ -459,7 +560,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/c/" rel="tag"># c</a>
+            <a href="/tags/weiqi/" rel="tag"># weiqi</a>
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+            <a href="/tags/sabaki/" rel="tag"># sabaki</a>
+          
+            <a href="/tags/leela-zero/" rel="tag"># leela-zero</a>
           
         </div>
       
@@ -472,8 +579,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/19/digitalocean-ops/" rel="next" title="post">
-                <i class="fa fa-chevron-left"></i> post
+              <a href="/2018/09/07/gpu-direct/" rel="next" title="GPU Direct RDMA">
+                <i class="fa fa-chevron-left"></i> GPU Direct RDMA
               </a>
             
           </div>
@@ -481,6 +588,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/18/leelaz/" rel="prev" title="Leela-Zero 代码分析（autogtp）">
+                Leela-Zero 代码分析（autogtp） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -664,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#const-标识符"><span class="nav-number">1.</span> <span class="nav-text">const 标识符</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sabaki-Leela-Zero-Leelasabaki"><span class="nav-number">1.</span> <span class="nav-text">Sabaki + Leela-Zero + Leelasabaki</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Based-on-Windows-Play-for-fun"><span class="nav-number">1.1.</span> <span class="nav-text">Based on Windows (Play for fun)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Based-on-Linux-Research"><span class="nav-number">1.2.</span> <span class="nav-text">Based on Linux (Research)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Dockerfile-安装-Leela-Zero"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用 Dockerfile 安装 Leela-Zero</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行自对弈程序（Self-Play）"><span class="nav-number">1.2.2.</span> <span class="nav-text">运行自对弈程序（Self Play）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Tensorflow-训练模型（Training）"><span class="nav-number">1.2.3.</span> <span class="nav-text">使用 Tensorflow 训练模型（Training）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Leelaz-中使用新模型"><span class="nav-number">1.2.4.</span> <span class="nav-text">在 Leelaz 中使用新模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Errors"><span class="nav-number">1.2.5.</span> <span class="nav-text">Errors</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -828,9 +939,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'https://leungf.github.io/2018/10/20/c-language/';
-        this.page.identifier = '2018/10/20/c-language/';
-        this.page.title = 'C 语义笔记';
+        this.page.url = 'https://leungf.github.io/2018/09/15/sabaki/';
+        this.page.identifier = '2018/09/15/sabaki/';
+        this.page.title = '基于 Sabaki 搭建围棋 AI';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
